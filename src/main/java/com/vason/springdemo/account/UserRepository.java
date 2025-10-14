@@ -1,4 +1,4 @@
-package com.vason.springdemo;
+package com.vason.springdemo.account;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

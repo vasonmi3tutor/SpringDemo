@@ -1,4 +1,4 @@
-package com.vason.springdemo;
+package com.vason.springdemo.account;
 
 import lombok.Getter;
 import lombok.Setter;

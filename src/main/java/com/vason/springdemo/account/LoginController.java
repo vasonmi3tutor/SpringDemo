@@ -1,4 +1,4 @@
-package com.vason.springdemo;
+package com.vason.springdemo.account;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

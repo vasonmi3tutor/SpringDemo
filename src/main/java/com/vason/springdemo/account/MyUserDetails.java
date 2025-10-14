@@ -1,4 +1,4 @@
-package com.vason.springdemo;
+package com.vason.springdemo.account;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
