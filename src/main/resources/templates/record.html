@@ -18,7 +18,7 @@
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/content}">Content</a>
+                    <a class="nav-link active" th:href="@{/record}">Content</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
@@ -53,9 +53,9 @@
 
 <!-- Main Content -->
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-record-between align-items-center mb-3">
         <h2>Content</h2>
-        <a th:href="@{/content/add}" class="btn btn-primary">Register</a>
+        <a th:href="@{/record/add}" class="btn btn-primary">Register</a>
     </div>
 
     <!-- Table -->
@@ -70,36 +70,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>2024-10-14 10:30:45</td>
-                <td>+150</td>
-                <td>Initial deposit</td>
-                <td>
-                    <button class="btn btn-sm btn-warning me-1" title="Edit">
-                        <i class="bi bi-pencil"></i>
-                    </button>
-                    <button class="btn btn-sm btn-danger" title="Delete">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2024-10-14 11:15:22</td>
-                <td>-50</td>
-                <td>Withdrawal</td>
-                <td>
-                    <button class="btn btn-sm btn-warning me-1" title="Edit">
-                        <i class="bi bi-pencil"></i>
-                    </button>
-                    <button class="btn btn-sm btn-danger" title="Delete">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2024-10-14 14:20:10</td>
-                <td>+200</td>
-                <td>Payment received</td>
+            <tr th:each="record : ${records}">
+                <td th:text="${record.timestamp}"></td>
+                <td th:text="${record.value_change}">+150</td>
+                <td th:text="${record.remark}">Initial deposit</td>
                 <td>
                     <button class="btn btn-sm btn-warning me-1" title="Edit">
                         <i class="bi bi-pencil"></i>
