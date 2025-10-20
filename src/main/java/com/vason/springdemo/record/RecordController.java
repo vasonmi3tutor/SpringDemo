@@ -4,10 +4,7 @@ import com.vason.springdemo.account.User;
 import com.vason.springdemo.account.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
@@ -18,6 +15,8 @@ import java.util.List;
 public class RecordController {
     private final UserRepository userRepository;
     private final RecordRepository recordRepository;
+
+    protected Long currentRecordId;
 
     public RecordController(UserRepository userRepository, RecordRepository recordRepository) {
         this.userRepository = userRepository;
@@ -56,9 +55,30 @@ public class RecordController {
         return "redirect:/record/add?success";
     }
 
+    @PostMapping("/record/edit/prepare")
+    public String prepareEditContent(@RequestParam("id") Long recordId, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("record_id", recordId);
+        return "redirect:/record/edit";
+    }
+
     @RequestMapping("/record/edit")
-    public String showEditContent(Model model, Principal principal){
+    public String showEditContent(Model model){
+        currentRecordId = (Long)model.getAttribute("record_id");
         model.addAttribute("record", new Record());
         return "record-edit.html";
     }
+
+    @PostMapping("record/edit")
+    public String doEditContent(@ModelAttribute("record") Record record,Model model){
+        Long recordId = (Long)model.getAttribute("record_id");
+        int affectedRows = recordRepository.updateByRecordIdSql(currentRecordId, record.getValue_change(), record.getRemark());
+        return "redirect:/record";
+    }
+
+    @PostMapping("/record/delete")
+    public String doDeleteContent(@RequestParam("id") Long recordId, RedirectAttributes redirectAttributes){
+        recordRepository.deleteByRecordIdSql(recordId);
+        return "redirect:/record";
+    }
+
 }

@@ -55,7 +55,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-record-between align-items-center mb-3">
         <h2>Content</h2>
-        <a th:href="@{/record/add}" class="btn btn-primary">Register</a>
+        <a th:href="@{/record/add}" class="btn btn-primary">Add Data</a>
     </div>
 
     <!-- Table -->
@@ -75,12 +75,18 @@
                 <td th:text="${record.value_change}">+150</td>
                 <td th:text="${record.remark}">Initial deposit</td>
                 <td>
-                    <button class="btn btn-sm btn-warning me-1" title="Edit">
-                        <i class="bi bi-pencil"></i>
-                    </button>
-                    <button class="btn btn-sm btn-danger" title="Delete">
-                        <i class="bi bi-trash"></i>
-                    </button>
+                    <form th:action="@{/record/edit/prepare}" method="POST">
+                        <input type="hidden" name="id" th:value="${record.id}" />
+                        <button type="submit" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </form>
+                    <form th:action="@{/record/delete}" method="POST">
+                        <input type="hidden" name="id" th:value="${record.id}" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
             </tbody>
