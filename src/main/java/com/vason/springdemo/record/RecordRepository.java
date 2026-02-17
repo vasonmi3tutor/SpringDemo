@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
-    @Query(value = "SELECT * FROM record WHERE user_id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM record r WHERE r.user_id = :id")
     List<Record> findAllByUserIdSql(@Param("id") Long userId);
 
     @Modifying
