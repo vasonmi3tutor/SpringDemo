@@ -17,11 +17,11 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE record r SET r.value_change = :value_change, r.remark = :remark WHERE r.id = :id")
+    @Query(value = "UPDATE record SET value_change = :value_change, remark = :remark WHERE id = :id", nativeQuery = true)
     int updateByRecordIdSql(@Param("id") Long recordId, @Param("value_change") BigDecimal valueChange, @Param("remark") String remark);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM record r WHERE r.id = :id")
+    @Query(value = "DELETE FROM record WHERE record.id = :id", nativeQuery = true)
     int deleteByRecordIdSql(@Param("id") Long id);
 }
