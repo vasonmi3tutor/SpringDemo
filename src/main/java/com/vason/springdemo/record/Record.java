@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "`record`")
+@Table(name = "records")
 public class Record {
     @Id // Primary Key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto Increment
